@@ -1,5 +1,5 @@
 # Netflix - GPT
-- crate react app
+- create react app
 - configured Tailwind-css
 
 # Features
