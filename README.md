@@ -30,6 +30,9 @@
 - Build Movie List
 - Build Movie Card
 - Made the UI look better
+- Created a configSlice and GPTSlice for language configuration and GPT search api
+- Impletented GTPSearch component
+
 
 
 # Features

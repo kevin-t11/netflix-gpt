@@ -6,12 +6,16 @@ import useNowPlayingMovies from '../hooks/useNowPlayingMovies'; // Correct impor
 import useTopRatedMovies from '../hooks/useTopRatedMovies';
 import usePopularMovies from '../hooks/usePopularMovies';
 import useUpcomingMovies from '../hooks/useUpcomingMovies';
+import { useSelector } from 'react-redux';
+import GPTSearch from './GPTSearch';
 
 const Browse = () => {
   const nowPlayingMovies = useNowPlayingMovies(); // Corrected usage of useNowPlayingMovies
   const topRatedMovies = useTopRatedMovies();
   const popularMovies = usePopularMovies();
   const upcomingMovies = useUpcomingMovies();
+
+  const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch)
 
   const allLoading = nowPlayingMovies.loading || topRatedMovies.loading || popularMovies.loading || upcomingMovies.loading;
 
@@ -23,8 +27,17 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {
+        showGPTSearch ?
+          (
+            <GPTSearch />
+          ) : (
+            <>
+              <MainContainer />
+              <SecondaryContainer />
+
+            </>
+          )}
     </div>
   );
 };
