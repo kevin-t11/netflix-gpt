@@ -1,23 +1,54 @@
-import React from 'react'
-import MovieCard from './MovieCard'
+import React from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import MovieCard from './MovieCard';
 
 const MovieList = ({ title, movies }) => {
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 7,
+    slidesToScroll: 7,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
-    // console.log(title);
-    // console.log(movies);
-
-    return (
-        <div>
-            <p className='text-2xl text-white font-semibold px-20 bg-center'>{title}</p>
-            <div className='flex overflow-x-scroll'>
-                <div className='flex pl-20'>
-                    {movies && movies.map((movie, index) => (
-                        <MovieCard key={index} poster_path={movie?.poster_path} />
-                    ))}
-                </div>
+  return (
+    <div className='pl-20'>
+      <p className='text-2xl text-white font-semibold bg-center'>{title}</p>
+      <Slider {...settings}>
+        {movies &&
+          movies.map((movie, index) => (
+            <div key={index}>
+              <MovieCard poster_path={movie?.poster_path} />
             </div>
-        </div>
-    )
-}
+          ))}
+      </Slider>
+    </div>
+  );
+};
 
 export default MovieList;

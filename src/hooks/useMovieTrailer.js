@@ -5,7 +5,7 @@ import { addTrailerVideo } from "../utils/movieSlice";
 
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // Introduce loading state
+  const [loading, setLoading] = useState(true); 
 
   const getMovieVideos = async () => {
     try {
@@ -29,9 +29,9 @@ const useMovieTrailer = (movieId) => {
 
   useEffect(() => {
     getMovieVideos();
-  }, [movieId]); // Include movieId in the dependency array of useEffect
+  }, [movieId]); 
 
-  return loading; // Return loading state
+  return loading;
 };
 
 export default useMovieTrailer;
