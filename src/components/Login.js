@@ -1,186 +1,7 @@
-// import React from "react";
-// import Header from "./header";
-// import { useState } from "react";
-// import { useRef } from "react";
-// import { checkValidData } from "../utils/validation";
-// import {
-//   createUserWithEmailAndPassword,
-//   signInWithEmailAndPassword,
-//   updateProfile,
-// } from "firebase/auth";
-// import { auth } from "../utils/firebase";
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { addUser } from "../utils/userSlice";
-
-// const Login = () => {
-//   const [isSignInForm, setIsSignInForm] = useState(true);
-//   const [errorMessage, setErrorMessage] = useState(null);
-
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-
-//   const email = useRef(null);
-//   const password = useRef(null);
-//   const fullname = useRef(null);
-
-//   const toggleSigninForm = () => {
-//     setIsSignInForm(!isSignInForm);
-//   };
-
-//   const handleFormSubmit = (e) => {
-//     e.preventDefault();
-//     // Validate the form data
-//     const msg = checkValidData(email.current.value, password.current.value);
-
-//     setErrorMessage(msg);
-
-//     if (msg) return;
-
-//     // Sign in/ Sign up validation logic
-//     if (!isSignInForm) {
-//       // sign up logic
-//       createUserWithEmailAndPassword(
-//         auth,
-//         email.current.value,
-//         password.current.value
-//       )
-//         .then((userCredential) => {
-//           // Signed up
-//           const user = userCredential.user;
-
-//           updateProfile(user, {
-//             displayName: fullname.current.value,
-//             photoURL: "https://avatars.githubusercontent.com/u/99701249?v=4",
-//           })
-//             .then(() => {
-//               // Profile updated!
-//               const { uid, email, displayName, photoURL } = auth.currentUser;
-//               dispatch(
-//                 addUser({
-//                   uid: uid,
-//                   email: email,
-//                   displayName: displayName,
-//                   photoURL: photoURL,
-//                 })
-//               );
-//               navigate("/browse");
-//             })
-//             .catch((error) => {
-//               // An error occurred
-//               setErrorMessage(error.message);
-//             });
-//           // console.log(user);
-//           // navigate("/browse");
-//         })
-//         .catch((error) => {
-//           const errorCode = error.code;
-//           const errorMessage = error.message;
-//           setErrorMessage(errorCode + "-" + errorMessage);
-//         });
-//     } else {
-//       // sign in logic
-//       signInWithEmailAndPassword(
-//         auth,
-//         email.current.value,
-//         password.current.value
-//       )
-//         .then((userCredential) => {
-//           // Signed in
-//           const user = userCredential.user;
-//           // console.log(user);
-//           navigate("/browse");
-//         })
-//         .catch((error) => {
-//           const errorCode = error.code;
-//           const errorMessage = error.message;
-//           setErrorMessage("User not found. Please check your credentials.");
-//         });
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <Header />
-//       <div className="absolute">
-//         <img
-//           src="https://assets.nflxext.com/ffe/siteui/vlv3/d1532433-07b1-4e39-a920-0f08b81a489e/67033404-2df8-42e0-a5a0-4c8288b4da2c/IN-en-20231120-popsignuptwoweeks-perspective_alpha_website_large.jpg"
-//           alt="Netflix Background"
-//         />
-//       </div>
-//       <form
-//         onSubmit={handleFormSubmit}
-//         className="w-3/12 absolute p-12 bg-black mx-auto my-36 right-0 left-0 text-white rounded-lg bg-opacity-80"
-//       >
-//         <h1 className="text-3xl font-bold py-4 text-left">
-//           {isSignInForm ? "Sign In Here" : "Sign Up Here"}
-//         </h1>
-//         {!isSignInForm && (
-//           <input
-//             ref={fullname}
-//             type="text"
-//             name="fullname"
-//             placeholder="Full Name"
-//             className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
-//           />
-//         )}
-//         <input
-//           ref={email}
-//           type="text"
-//           name="email"
-//           placeholder="Email address"
-//           className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
-//         />
-
-//         <input
-//           ref={password}
-//           type="password"
-//           name="pass"
-//           placeholder="Password"
-//           className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
-//         />
-//         <p className="text-red-500 text-base font-bold p-2">{errorMessage}</p>
-//         <button
-//           type="submit"
-//           className="p-3 my-6 bg-red-700 w-1/2 mx-auto rounded-lg block"
-//         >
-//           {isSignInForm ? "Sign In" : "Sign Up"}
-//         </button>
-//         <div className="py-4">
-//           {isSignInForm ? (
-//             <>
-//               New to Netflix?{" "}
-//               <span
-//                 onClick={toggleSigninForm}
-//                 className="text-red-600 decoration-red-600 hover:text-red-800 hover:underline cursor-pointer"
-//               >
-//                 Sign Up now
-//               </span>
-//             </>
-//           ) : (
-//             <>
-//               Already registered?{" "}
-//               <span
-//                 onClick={toggleSigninForm}
-//                 className="text-red-600 decoration-red-600 hover:text-red-800 hover:underline cursor-pointer"
-//               >
-//                 Sign In now
-//               </span>
-//             </>
-//           )}
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Login;
-
-
-
-
-import React, { useState, useRef } from "react";
+import React from "react";
 import Header from "./header";
+import { useState } from "react";
+import { useRef } from "react";
 import { checkValidData } from "../utils/validation";
 import {
   createUserWithEmailAndPassword,
@@ -191,7 +12,6 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import jwt from "jsonwebtoken"; // Import the JWT library
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -208,64 +28,74 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-
+    // Validate the form data
     const msg = checkValidData(email.current.value, password.current.value);
+
     setErrorMessage(msg);
 
     if (msg) return;
 
-    try {
-      let userCredential;
+    // Sign in/ Sign up validation logic
+    if (!isSignInForm) {
+      // sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
 
-      if (!isSignInForm) {
-        userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        );
-
-        const user = userCredential.user;
-
-        await updateProfile(user, {
-          displayName: fullname.current.value,
-          photoURL: "https://avatars.githubusercontent.com/u/99701249?v=4",
-        });
-      } else {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        );
-      }
-
-      const user = userCredential.user;
-
-      // Generate a JWT token with a 5-hour expiration
-      const token = jwt.sign(
-        { uid: user.uid, email: user.email },
-        "your-secret-key",
-        { expiresIn: '5h' }
-      );
-
-      // Store the token in localStorage or secure cookie
-      localStorage.setItem("jwtToken", token);
-
-      dispatch(
-        addUser({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
+          updateProfile(user, {
+            displayName: fullname.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/99701249?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMessage(error.message);
+            });
+          // console.log(user);
+          // navigate("/browse");
         })
-      );
-
-      navigate("/browse");
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      setErrorMessage(errorCode + "-" + errorMessage);
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
+    } else {
+      // sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // console.log(user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage("User not found. Please check your credentials.");
+        });
     }
   };
 
@@ -345,3 +175,173 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+
+// import React, { useState, useRef } from "react";
+// import Header from "./header";
+// import { checkValidData } from "../utils/validation";
+// import {
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   updateProfile,
+// } from "firebase/auth";
+// import { auth } from "../utils/firebase";
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { addUser } from "../utils/userSlice";
+// import jwt from "jsonwebtoken"; // Import the JWT library
+
+// const Login = () => {
+//   const [isSignInForm, setIsSignInForm] = useState(true);
+//   const [errorMessage, setErrorMessage] = useState(null);
+
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const email = useRef(null);
+//   const password = useRef(null);
+//   const fullname = useRef(null);
+
+//   const toggleSigninForm = () => {
+//     setIsSignInForm(!isSignInForm);
+//   };
+
+//   const handleFormSubmit = async (e) => {
+//     e.preventDefault();
+
+//     const msg = checkValidData(email.current.value, password.current.value);
+//     setErrorMessage(msg);
+
+//     if (msg) return;
+
+//     try {
+//       let userCredential;
+
+//       if (!isSignInForm) {
+//         userCredential = await createUserWithEmailAndPassword(
+//           auth,
+//           email.current.value,
+//           password.current.value
+//         );
+
+//         const user = userCredential.user;
+
+//         await updateProfile(user, {
+//           displayName: fullname.current.value,
+//           photoURL: "https://avatars.githubusercontent.com/u/99701249?v=4",
+//         });
+//       } else {
+//         userCredential = await signInWithEmailAndPassword(
+//           auth,
+//           email.current.value,
+//           password.current.value
+//         );
+//       }
+
+//       const user = userCredential.user;
+
+//       // Generate a JWT token with a 5-hour expiration
+//       const token = jwt.sign(
+//         { uid: user.uid, email: user.email },
+//         "your-secret-key",
+//         { expiresIn: '5h' }
+//       );
+
+//       // Store the token in localStorage or secure cookie
+//       localStorage.setItem("jwtToken", token);
+
+//       dispatch(
+//         addUser({
+//           uid: user.uid,
+//           email: user.email,
+//           displayName: user.displayName,
+//           photoURL: user.photoURL,
+//         })
+//       );
+
+//       navigate("/browse");
+//     } catch (error) {
+//       const errorCode = error.code;
+//       const errorMessage = error.message;
+//       setErrorMessage(errorCode + "-" + errorMessage);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <Header />
+//       <div className="absolute">
+//         <img
+//           src="https://assets.nflxext.com/ffe/siteui/vlv3/d1532433-07b1-4e39-a920-0f08b81a489e/67033404-2df8-42e0-a5a0-4c8288b4da2c/IN-en-20231120-popsignuptwoweeks-perspective_alpha_website_large.jpg"
+//           alt="Netflix Background"
+//         />
+//       </div>
+//       <form
+//         onSubmit={handleFormSubmit}
+//         className="w-3/12 absolute p-12 bg-black mx-auto my-36 right-0 left-0 text-white rounded-lg bg-opacity-80"
+//       >
+//         <h1 className="text-3xl font-bold py-4 text-left">
+//           {isSignInForm ? "Sign In Here" : "Sign Up Here"}
+//         </h1>
+//         {!isSignInForm && (
+//           <input
+//             ref={fullname}
+//             type="text"
+//             name="fullname"
+//             placeholder="Full Name"
+//             className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
+//           />
+//         )}
+//         <input
+//           ref={email}
+//           type="text"
+//           name="email"
+//           placeholder="Email address"
+//           className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
+//         />
+
+//         <input
+//           ref={password}
+//           type="password"
+//           name="pass"
+//           placeholder="Password"
+//           className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
+//         />
+//         <p className="text-red-500 text-base font-bold p-2">{errorMessage}</p>
+//         <button
+//           type="submit"
+//           className="p-3 my-6 bg-red-700 w-1/2 mx-auto rounded-lg block"
+//         >
+//           {isSignInForm ? "Sign In" : "Sign Up"}
+//         </button>
+//         <div className="py-4">
+//           {isSignInForm ? (
+//             <>
+//               New to Netflix?{" "}
+//               <span
+//                 onClick={toggleSigninForm}
+//                 className="text-red-600 decoration-red-600 hover:text-red-800 hover:underline cursor-pointer"
+//               >
+//                 Sign Up now
+//               </span>
+//             </>
+//           ) : (
+//             <>
+//               Already registered?{" "}
+//               <span
+//                 onClick={toggleSigninForm}
+//                 className="text-red-600 decoration-red-600 hover:text-red-800 hover:underline cursor-pointer"
+//               >
+//                 Sign In now
+//               </span>
+//             </>
+//           )}
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Login;

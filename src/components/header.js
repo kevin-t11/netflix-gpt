@@ -64,10 +64,10 @@ const Header = () => {
         <img
           src={user.photoURL}
           alt="usericon"
-          className="w-10 h-10 rounded-lg mx-2 "
+          className="w-10 h-10 rounded-lg mx-2"
         />
-        <button onClick={handleSignOut} className="font-bold">
-          (Sign out)
+        <button className="font-semibold text-white bg-red-600 px-2 mx-4 rounded-md" onClick={handleSignOut}>
+          Sign out
         </button>
       </div>)}
     </div>
