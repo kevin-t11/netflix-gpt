@@ -25,6 +25,12 @@
 - Plannig for main and secondary container
 - Fetch data for Trailer Video and updated the store with video data 
 - Embedded the youtube video and made it autoplay and mute
+- add the movies list like top rated, popular, upcoming movies
+- Created a custom hook for top rated, popular, upcoming movies
+- Build Movie List
+- Build Movie Card
+- Made the UI look better
+
 
 # Features
 - Login / Sign Up
