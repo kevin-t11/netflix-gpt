@@ -31,7 +31,12 @@
 - Build Movie Card
 - Made the UI look better
 - Created a configSlice and GPTSlice for language configuration and GPT search api
+<<<<<<< HEAD
 - Impletented GTPSearch component
+=======
+- Implemented GTPSearch component
+- Implemented GTPSlice configuration and using the groq-ai api key to get the movie suggestion
+>>>>>>> cda557e (using a Groq-ai api key the movie suggestions will be shown and memoization implemented for the same api calls offen.)
 
 
 

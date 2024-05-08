@@ -6,9 +6,15 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+<<<<<<< HEAD
   // <React.StrictMode>
     <App />
   /* </React.StrictMode> */
+=======
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+>>>>>>> cda557e (using a Groq-ai api key the movie suggestions will be shown and memoization implemented for the same api calls offen.)
 );
 
 // If you want to start measuring performance in your app, pass a function
