@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/movieSlice";
 import { API_OPTIONS } from "../utils/constants";
 
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); 
-
-  
-  const nowPlayingMovies = useSelector(store => store.movies.nowPlayingMovies);
+  const [loading, setLoading] = useState(true); // Introduce loading state
 
   const getNowPlayingMovies = async () => {
     try {
@@ -26,9 +23,7 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    
-    //memoization - is a technique to restrict the again and again making a api call to server while changing the page or something
-    !nowPlayingMovies && getNowPlayingMovies();
+    getNowPlayingMovies();
   }, [dispatch]); // Include dispatch in dependency array since it's used in the effect
 
   return loading; // Return the loading state
