@@ -34,6 +34,7 @@
 - Impletented GTPSearch component
 - Implemented GTPSlice configuration and using the groq-ai api key to get the movie suggestion
 - Using a Groq-ai api key the movie suggestions will be shown and memoization implemented for the same api calls offen.
+- Changed the Groq-ai api to google bard gemini ai api key
 
 # Features
 - Login / Sign Up
@@ -49,3 +50,14 @@
 - Netflix-GPT
     - Search bar
     - Movie Suggestions
+
+
+# Reference links 
+- For google gemini api key  
+    - https://aistudio.google.com/app/apikey
+- Packages
+    - npm i bard-api-node
+    - npm i firebase
+    - npm i jsonwebtoken
+    - npm i redux
+    - npm i @reduxjs/toolkit
