@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTopRatedMovies } from "../utils/movieSlice";
 
 const useTopRatedMovies = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // Introduce loading state
+  const [loading, setLoading] = useState(true);
+
+  const topRatedMovies = useSelector(store => store.movies.topRatedMovies);
 
   const getTopRatedMovies = async () => {
     try {
@@ -23,8 +25,9 @@ const useTopRatedMovies = () => {
   };
 
   useEffect(() => {
-    getTopRatedMovies();
-  }, [dispatch]); // Include dispatch in dependency array since it's used in the effect
+    //memoization - is a technique to restrict the again and again making a api call to server while changing the page or something
+    !topRatedMovies && getTopRatedMovies();
+  }, [dispatch]);
 
   return loading; // Return the loading state
 };

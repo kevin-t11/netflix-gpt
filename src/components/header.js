@@ -79,7 +79,7 @@ const Header = () => {
       </div>
       {user && (
         <div className="flex">
-          {showGPTSearch && (<select className="p-2 mx-2 bg-gray-700 text-white rounded-md" onChange={handleChangeLanguage}>
+          {showGPTSearch && (<select className="p-2 mr-4 bg-gray-700 text-white rounded-md" onChange={handleChangeLanguage}>
             {SUPPORTED_LANG.map((lang) => (
               <option key={lang.identifier} value={lang.identifier}>
                 {lang.name}
@@ -88,16 +88,16 @@ const Header = () => {
           </select>)}
 
           <button
-            className="font-semibold text-white bg-purple-500 px-2 mx-4 rounded-md" onClick={handleGptSearchClick}>
-            {showGPTSearch ? <p className="flex px-2">Home <span className="bg-center mt-1 ml-2"><IoHome /></span></p> : "GPT Search"}
+            className="font-semibold text-white bg-purple-500 px-2 mr-4 rounded-md" onClick={handleGptSearchClick}>
+            {showGPTSearch ? <p className="flex pr-2">Home <span className="bg-center mt-1 ml-2"><IoHome /></span></p> : "GPT Search"}
           </button>
           <img
             src={user.photoURL}
             alt="usericon"
-            className="w-10 h-10 rounded-lg mx-2"
+            className="w-10 h-10 rounded-lg mr-4"
           />
           <button
-            className="font-semibold text-white bg-red-600 px-2 mx-4 rounded-md"
+            className="font-semibold text-white bg-red-600 px-2 mr-4 rounded-md"
             onClick={() => setIsConfirmModalOpen(true)}
           >
             Sign out

@@ -32,8 +32,8 @@
 - Made the UI look better
 - Created a configSlice and GPTSlice for language configuration and GPT search api
 - Impletented GTPSearch component
-
-
+- Implemented GTPSlice configuration and using the groq-ai api key to get the movie suggestion
+- Using a Groq-ai api key the movie suggestions will be shown and memoization implemented for the same api calls offen.
 
 # Features
 - Login / Sign Up

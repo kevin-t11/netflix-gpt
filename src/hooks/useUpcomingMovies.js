@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addUpcomingMovies } from "../utils/movieSlice";
 
 const useUpcomingMovies = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); // Introduce loading state
+  const [loading, setLoading] = useState(true);
+
+  const upcomingMovies = useSelector(store => store.movies.upcomingMovies);
 
   const getUpcomingMovies = async () => {
     try {
@@ -23,8 +25,10 @@ const useUpcomingMovies = () => {
   };
 
   useEffect(() => {
-    getUpcomingMovies();
-  }, [dispatch]); // Include dispatch in dependency array since it's used in the effect
+
+    //memoization - is a technique to restrict the again and again making a api call to server while changing the page or something
+    !upcomingMovies && getUpcomingMovies();
+  }, [dispatch]);
 
   return loading; // Return the loading state
 };

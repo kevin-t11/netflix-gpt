@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTrailerVideo } from "../utils/movieSlice";
 
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+
+  const trailerVideo = useSelector(store => store.movies.trailerVideo);
 
   const getMovieVideos = async () => {
     try {
@@ -15,10 +17,10 @@ const useMovieTrailer = (movieId) => {
         API_OPTIONS
       );
       const json = await data.json();
-  
+
       const filterData = json.results.filter((video) => video.type === "Trailer");
       const trailer = filterData.length ? filterData[0] : json.results[0];
-  
+
       dispatch(addTrailerVideo(trailer));
     } catch (error) {
       console.error("Error fetching movie trailer:", error);
@@ -28,8 +30,9 @@ const useMovieTrailer = (movieId) => {
   };
 
   useEffect(() => {
-    getMovieVideos();
-  }, [movieId]); 
+    //memoization - is a technique to restrict the again and again making a api call to server while changing the page or something
+    !trailerVideo && getMovieVideos();
+  }, [movieId]);
 
   return loading;
 };
