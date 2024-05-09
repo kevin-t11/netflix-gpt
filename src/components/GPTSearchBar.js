@@ -4,6 +4,7 @@ import lang from '../utils/langConstants';
 import groqai from '../utils/groqai';
 import { API_OPTIONS } from '../utils/constants';
 import { addgptMovieResults } from '../utils/GPTSlice';
+import { BardAPI } from 'bard-api-node';
 
 
 const GPTSearchBar = () => {
@@ -32,27 +33,33 @@ const GPTSearchBar = () => {
 
     const gptQuery = "Act as a movie recommendation system and suggest some movies for query :" +
       searchText.current.value +
-      ", Please please keep in mind that give only 5 movie name not author or something else seperated by comma nothing else also keep in mind that this results will be searched onto TMDB database, like given example ahead. Example Result : Gadar, Koi Mil Gaya, Shole, Phir Hera Pheri, Lagaan. | also please please don't give the extra description like `Here are some horror/comedy movie recommendations:, I'm happy to help` only give movie title array."
+      ", Please please keep in mind that give only 5 movie name not author or something else seperated by comma nothing else also keep in mind that this results will be searched onto TMDB database, like given example ahead. Example Result : Gadar, Koi Mil Gaya, Shole, Phir Hera Pheri, Lagaan. | also please please don't give the extra description also not give the number only give names seperated by comma."
 
-    const groqResults = await groqai.chat.completions.create({
-      messages: [
-        {
-          role: "user",
-          content: gptQuery,
-        }
-      ],
-      model: "llama3-8b-8192"
-    });
+    // const groqResults = await groqai.chat.completions.create({
+    //   messages: [
+    //     {
+    //       role: "user",
+    //       content: gptQuery,
+    //     }
+    //   ],
+    //   model: "llama3-8b-8192"
+    // });
 
-    // console.log(groqResults.choices[0]?.message?.content || "");
-    const groqMovies = (groqResults.choices[0]?.message?.content).split(", ");
-    console.log(groqMovies);
+    const bard = new BardAPI();
+    await bard.initializeChat(process.env.REACT_APP_BARD_API_KEY);
+    // Send a query to Bard
+    const bardResults = await bard.getBardResponse(gptQuery);
+    console.log(bardResults.text);
 
-    const promiseArray = groqMovies.map(movie => searchMovieTMDB(movie));
+
+    const bardMovies = (bardResults?.text).split(",")
+    // console.log(bardMovies);
+
+    const promiseArray = bardMovies.map(movie => searchMovieTMDB(movie));
     const tmdbMovies = await Promise.all(promiseArray);
-    console.log(tmdbMovies);
+    // console.log(tmdbMovies);
 
-    dispatch(addgptMovieResults({movieNames : groqMovies, movieResults : tmdbMovies}));
+    dispatch(addgptMovieResults({ movieNames: bardMovies, movieResults: tmdbMovies }));
   }
 
 

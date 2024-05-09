@@ -7,8 +7,6 @@ const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
 
-  const trailerVideo = useSelector(store => store.movies.trailerVideo);
-
   const getMovieVideos = async () => {
     try {
       const data = await fetch(
@@ -18,20 +16,21 @@ const useMovieTrailer = (movieId) => {
       );
       const json = await data.json();
 
+
       const filterData = json.results.filter((video) => video.type === "Trailer");
       const trailer = filterData.length ? filterData[0] : json.results[0];
+      // console.log(trailer);
 
       dispatch(addTrailerVideo(trailer));
     } catch (error) {
       console.error("Error fetching movie trailer:", error);
     } finally {
-      setLoading(false); // Set loading to false after fetch completes (whether success or error)
+      setLoading(false); 
     }
   };
 
   useEffect(() => {
-    //memoization - is a technique to restrict the again and again making a api call to server while changing the page or something
-    !trailerVideo && getMovieVideos();
+    getMovieVideos();
   }, [movieId]);
 
   return loading;

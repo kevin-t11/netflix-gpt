@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import MovieCard from './MovieCard';
 
-const MovieList = ({ title, movies }) => {
+const MovieList = ({ movies }) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -38,7 +38,7 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className='pl-20'>
-      <p className='text-2xl text-white font-semibold bg-center'>{title}</p>
+      
       <Slider {...settings}>
         {movies &&
           movies.map((movie, index) => (
