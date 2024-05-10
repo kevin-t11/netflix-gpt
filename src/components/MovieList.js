@@ -36,17 +36,31 @@ const MovieList = ({ movies }) => {
     ],
   };
 
+  // Filter out movies with null poster_path
+  const filteredMovies = movies?.filter(movie => movie.poster_path !== null);
+
+  // Determine whether to enable slider based on the number of movies
+  const enableSlider = filteredMovies?.length > 6;
+
   return (
     <div className='pl-20'>
-      
-      <Slider {...settings}>
-        {movies &&
-          movies.map((movie, index) => (
+      {enableSlider ? (
+        <Slider {...settings}>
+          {filteredMovies?.map((movie, index) => (
             <div key={index}>
-              <MovieCard poster_path={movie?.poster_path} />
+              <MovieCard poster_path={movie.poster_path} />
             </div>
           ))}
-      </Slider>
+        </Slider>
+      ) : (
+        <div className="flex flex-wrap">
+          {filteredMovies?.map((movie, index) => (
+            <div key={index} className="w-1/7">
+              <MovieCard poster_path={movie.poster_path} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

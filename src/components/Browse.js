@@ -22,7 +22,7 @@ const Browse = () => {
   }
 
   return (
-    <div>
+    <div className=''>
       <Header />
       {showGPTSearch ? (
         <GPTSearch />

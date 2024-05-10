@@ -48,7 +48,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
+    <div className="">
       <RouterProvider router={appRouter} />
     </div>
   );
