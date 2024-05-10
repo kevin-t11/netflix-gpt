@@ -27,10 +27,10 @@ const Browse = () => {
       {showGPTSearch ? (
         <GPTSearch />
       ) : (
-        <>
+        <div className='bg-black -z-10'>
           <MainContainer />
           <SecondaryContainer />
-        </>
+        </div>
       )}
     </div>
   );

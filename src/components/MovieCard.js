@@ -1,17 +1,15 @@
-import React from 'react'
+import React from 'react';
 import { IMAGE_CDN_URL } from '../utils/constants';
 
-
 const MovieCard = ({ poster_path }) => {
-
-  // console.log(poster_path);
   if (!poster_path)
     return null;
-  return (
-    <div className='w-48 px-2.5'>
-      <img className='rounded-md shadow-md my-4' src={IMAGE_CDN_URL + poster_path} alt="Movie Poster" />
-    </div>
-  )
-}
 
-export default MovieCard
+  return (
+    <div className='w-32 h-48 md:w-48 md:h-72 px-2.5'>
+      <img className='md:w-40 md:h-60 w-full h-40  rounded-md shadow-md object-cover' src={IMAGE_CDN_URL + poster_path} alt="Movie Poster" />
+    </div>
+  );
+};
+
+export default MovieCard;

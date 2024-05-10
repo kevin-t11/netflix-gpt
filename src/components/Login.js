@@ -101,18 +101,21 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="relative h-screen">
       <Header />
-      <div className="absolute">
+      <div className="absolute inset-0 w-full h-full">
         <img
-          src={BG_URL} alt="Netflix Background"
+          src={BG_URL}
+          alt="Netflix Background"
+          className="absolute inset-0 w-full h-full object-cover"
         />
+        <div className="absolute inset-0 bg-black opacity-30"></div>
       </div>
       <form
         onSubmit={handleFormSubmit}
-        className="w-3/12 absolute p-12 bg-black mx-auto my-36 right-0 left-0 text-white rounded-lg bg-opacity-80"
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 md:w-11/12 mt-8 max-w-md p-8 md:p-12 bg-black text-white rounded-lg bg-opacity-80"
       >
-        <h1 className="text-3xl font-bold py-4 text-left">
+        <h1 className="text-3xl font-bold py-3 text-left">
           {isSignInForm ? "Sign In Here" : "Sign Up Here"}
         </h1>
         {!isSignInForm && (

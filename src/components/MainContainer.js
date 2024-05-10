@@ -19,7 +19,7 @@ const MainContainer = () => {
   const truncatedOverview = overview.length > 200 ? overview.slice(0, 200) + '...' : overview;
 
   return (
-    <div>
+    <div className='md:pt-0 pt-[20%] bg-black'>
       <VideoTitle title={original_title} overview={truncatedOverview} />
       <VideoBackground movieId={id} />
     </div>

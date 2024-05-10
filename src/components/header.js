@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +44,7 @@ const Header = () => {
     // console.log(e.target.value);
     dispatch(changeLanguage(e.target.value));
   }
-  
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -73,42 +72,44 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen px-4 py-4 bg-gradient-to-b from-black z-10 flex justify-between ">
+    <div className="absolute w-full px-2 py-1 md:py-4 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
       <div>
-        <img src={LOGO} alt="Netflix Logo" className="w-32" />
+        <img src={LOGO} alt="Netflix Logo" className="w-32 mx-auto md:mx-0 md:mb-0 mb-2" />
       </div>
-      {user && (
-        <div className="flex">
-          {showGPTSearch && (<select className="p-2 mr-4 bg-gray-700 text-white rounded-md" onChange={handleChangeLanguage}>
-            {SUPPORTED_LANG.map((lang) => (
-              <option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
-              </option>
-            ))}
-          </select>)}
+      <div className="mx-7 md:mx-0">
+        {user && (
+          <div className="flex justify-between">
+            {showGPTSearch && (<select className="p-2 mr-4 bg-gray-700 text-white rounded-md" onChange={handleChangeLanguage}>
+              {SUPPORTED_LANG.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>)}
 
-          <button
-            className="font-semibold text-white bg-purple-500 px-2 mr-4 rounded-md" onClick={handleGptSearchClick}>
-            {showGPTSearch ? <p className="flex pr-2">Home <span className="bg-center mt-1 ml-2"><IoHome /></span></p> : "GPT Search"}
-          </button>
-          <img
-            src={user.photoURL}
-            alt="usericon"
-            className="w-10 h-10 rounded-lg mr-4"
-          />
-          <button
-            className="font-semibold text-white bg-red-600 px-2 mr-4 rounded-md"
-            onClick={() => setIsConfirmModalOpen(true)}
-          >
-            Sign out
-          </button>
-        </div>
-      )}
-      <SignoutConfirmationModal
-        isOpen={isConfirmModalOpen}
-        onClose={() => setIsConfirmModalOpen(false)}
-        onConfirm={handleConfirmSignOut}
-      />
+            <button
+              className="font-semibold text-white bg-purple-500 px-2 mr-4 rounded-md" onClick={handleGptSearchClick}>
+              {showGPTSearch ? <p className="flex pr-2">Home <span className="bg-center mt-1 ml-2"><IoHome /></span></p> : "GPT Search"}
+            </button>
+            <img
+              src={user.photoURL}
+              alt="usericon"
+              className="w-10 h-10 rounded-lg mr-4"
+            />
+            <button
+              className="font-semibold text-white mr-0 md:mr-4 bg-red-600 px-2 rounded-md"
+              onClick={() => setIsConfirmModalOpen(true)}
+            >
+              Sign out
+            </button>
+          </div>
+        )}
+        <SignoutConfirmationModal
+          isOpen={isConfirmModalOpen}
+          onClose={() => setIsConfirmModalOpen(false)}
+          onConfirm={handleConfirmSignOut}
+        />
+      </div>
     </div>
   );
 };
