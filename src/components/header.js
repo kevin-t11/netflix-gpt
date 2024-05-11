@@ -11,13 +11,12 @@ import { toggleShowGPTSearch } from "../utils/GPTSlice";
 import { changeLanguage } from '../utils/configSlice';
 import { IoHome } from "react-icons/io5";
 
-
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
-  // subscribing to the store
+  // Subscribing to the store
   const user = useSelector((store) => store.user);
   const showGPTSearch = useSelector((store) => store.gpt.showGPTSearch);
 
@@ -67,12 +66,12 @@ const Header = () => {
       }
     });
 
-    // unsubscribe when component unmounts
+    // Unsubscribe when component unmounts
     return () => unsubscribe();
   }, []);
 
   return (
-    <div className="absolute w-full px-2 py-1 md:py-4 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+    <div className="fixed top-0 left-0 w-full z-50 px-2 py-1 md:py-4 bg-gradient-to-b from-black flex flex-col md:flex-row justify-between">
       <div>
         <img src={LOGO} alt="Netflix Logo" className="w-32 mx-auto md:mx-0 md:mb-0 mb-2" />
       </div>
