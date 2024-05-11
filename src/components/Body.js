@@ -3,11 +3,11 @@ import Browse from "./Browse";
 import Login from "./Login";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import ErrorPage from "./ErrorPage";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Body = () => {
   const dispatch = useDispatch();

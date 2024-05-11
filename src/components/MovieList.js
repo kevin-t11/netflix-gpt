@@ -22,10 +22,15 @@ const MovieList = ({ movies }) => {
     slidesToScroll: slidesToShow,
   };
 
+  // Custom styles for Slider component
+  const sliderStyles = {
+    marginTop: '20px', // Adjust the marginTop as needed to add upper space
+  };
+
   return (
     <div className='mx-5 md:mx-14'>
       {enableSlider ? (
-        <Slider {...settings}>
+        <Slider {...settings} style={sliderStyles}>
           {filteredMovies?.map((movie, index) => (
             <div key={index}>
               <MovieCard poster_path={movie.poster_path} />
