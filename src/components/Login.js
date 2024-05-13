@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Header from "./header";
-import { useState } from "react";
-import { useRef } from "react";
 import { checkValidData } from "../utils/validation";
 import {
   createUserWithEmailAndPassword,
@@ -13,10 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BG_URL } from "../utils/constants";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -71,8 +71,6 @@ const Login = () => {
               // An error occurred
               setErrorMessage(error.message);
             });
-          // console.log(user);
-          // navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -135,13 +133,23 @@ const Login = () => {
           className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
         />
 
-        <input
-          ref={password}
-          type="password"
-          name="pass"
-          placeholder="Password"
-          className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
-        />
+        <div className="relative">
+          <input
+            ref={password}
+            type={showPassword ? "text" : "password"} 
+            name="pass"
+            placeholder="Password"
+            className="p-4 my-5 w-full bg-gray-600 rounded-lg block"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)} 
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 focus:outline-none"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />} 
+          </button>
+        </div>
+
         <p className="text-red-500 text-base font-bold p-2">{errorMessage}</p>
         <button
           type="submit"
